@@ -1,27 +1,76 @@
 package com.example.javademierda;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+//    @BindView(R.id.nav_host_fragment)
+    //android.widget.fragment navHostFragment;
+//    android.widget.fragment navHostFragment;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    /* Variables */
+    //@BindView(R.id.toolbar)
+    //Toolbar toolbar;
+
+    @BindView(R.id.etNombre)
+    EditText etNombre;
+
+    @BindView(R.id.etApellidos)
+    EditText etApellidos;
+
+    @BindView(R.id.etEmail)
+    EditText etEmail;
+
+    @BindView(R.id.etTelefono)
+    EditText etTelefono;
+
+    @BindView(R.id.swTerminos)
+    Switch swTerminos;
+
+/*    @BindView(R.id.content_main)
+    RelativeLayout contentMain;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @BindView(R.id.nav_view)
+    NavigationView navView;
+
+    @BindView(R.id.drawer_Layour)
+    DrawerLayour dreawerLayout;
+    /**/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+        //La omite Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = (ToolBar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        //La omite FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,5 +100,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.btnGuardar)
+    public void saveData(){
+        if(swTerminos.isChecked()){
+            Toast.makeText(this, "Registrando a " + etNombre.getText().toString() + "...",
+                    Toast.LENGTH_SHORT).show();
+        } /*else {
+            Snackbar.make(content_main, "Debe aceptar los terminos y condiciones.", Snackbar.LENGTH_LONG)
+                    .setAction("Ok", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            swTerminos.setChecked(true);
+                        }
+                    })
+                    .show();
+        }*/
     }
 }
